@@ -1,0 +1,177 @@
+ 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>美图下载器</title>
+    <style type="text/css">
+        *{
+            margin:0;
+            padding: 0;
+        }
+        #bg{
+            background: url(https://bilibini.com/imgs/bg/bg.jpg) no-repeat center;
+            background-size: cover;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 1;
+            border-radius: 8px 8px 0px 0px;
+        }
+        #main {
+            position: relative;
+            display: flex;
+            width: 100%;
+            background-color: #ffffff14;
+            backdrop-filter: blur(6px);
+            top:40px;
+        }
+        .row{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content:space-between;
+            width: auto;
+            position: relative;
+        }
+        .column {
+            display: flex;
+            flex-direction: column;
+        }
+        .box {
+            margin: 15px;
+            position: relative;
+            transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+        }
+        img {
+            padding: 0;
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 11px 1px #000000ee;
+            transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+        }
+        img:hover{
+            filter: saturate(145%) brightness(95%) contrast(115%);
+        }
+        #custom-menu{
+            display: flex;
+            position:fixed;
+            height: 40px;
+            width: 100%;
+            line-height: 40px;
+            z-index: 2;
+            font-weight: 900;
+            color: #fff;
+            background-color: #6903c5;
+            border-radius: 8px 8px 0px 0px;
+            flex-direction: row;
+            justify-content:space-between;
+        }
+        #custom-menu .menu-text{
+            margin-left: 20px;
+            text-shadow: 1px 0px 4px white;
+        }
+        .menu-div{
+            margin-right: 10px;
+        }
+        .menu-div Button{
+            width: 30px;
+            height: 30px;
+            background-color: #6903c5;
+            border: #6903c5;
+            color: #fff;
+            border-radius: 20px;
+            transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+        }
+        .menu-div Button:hover{
+            width: 35px;
+            height: 35px;
+            box-shadow: 0 0 20px 0px #fff;
+            background-color: #6014a1;
+        }
+    </style>
+</head>
+<body>
+    <div id="bg"></div>
+    <div style="display: none;" id="custom-menu" onmousedown="aardio.hitCaption();return false;" >
+        <div class="menu-text"><span>美图下载器</span></div>
+        <div class="menu-div">
+            <Button type="text" >▁</Button>
+            <Button type="text" id="closed-btn" >✘</Button>
+        </div>
+    </div>
+    <div style="top:0;" id="main">
+        <div class="row">
+            <div class="box" ondblclick="onclickImg('http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg')" onclick="ondbclickImg('http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg')">
+                <img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt="">
+            </div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        // https://v.api.aa1.cn/api/api-tplist/go.php/api/picture/index?page=2
+        // 导入aardio中的app.external 对象
+        aardio = require("aardio");
+        
+        function onclickImg(imgsrc){
+            aardio.down(imgsrc);
+        }
+        function ondbclickImg(imgsrc){
+            alert('23333');
+            aardio.look(imgsrc);
+        }
+
+        function addImg(imgsrc){
+            var main=document.querySelector("#main .row");
+            var box=`<div class="box" onclick="onclickImg('${imgsrc}')"><img src="${imgsrc}" alt=""></div>`;
+            main.insertAdjacentHTML("beforeend",box);
+        }
+
+        var iNumber=0;
+
+        // 原生JS 判断整个文档滚动至底部
+        window.onscroll = ()=>{
+            // 窗口高度
+            var windowHeight = document.body.clientHeight;
+            // 页面高度
+            var documentHeight = document.body.scrollHeight;
+            // 滚动条位置
+            var scrollTop =  document.body.scrollTop;
+            if ((windowHeight + scrollTop + 2) >= documentHeight) {
+                //页面滚动到达底部
+                iNumber=iNumber+1;
+                aardio.getImg(iNumber).then((imgsrclist)=>{
+                    let imgsrclists=imgsrclist.split('||');
+                    for(let imgsrc in imgsrclists){
+                        addImg(imgsrc);
+                    }
+                })
+            }
+        }
+
+    </script>
+</body>
+</html>

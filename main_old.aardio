@@ -1,0 +1,374 @@
+import win.ui;
+/*DSG{{*/
+mainForm = win.form(text="aardio工程22";right=959;bottom=591)
+mainForm.add(
+edit={cls="edit";left=285;top=18;right=931;bottom=564;db=1;dl=1;dr=1;dt=1;edge=1;hscroll=1;multiline=1;vscroll=1;z=1};
+plus={cls="plus";left=26;top=23;right=271;bottom=112;dl=1;dt=1;z=2}
+)
+/*}}*/
+
+import py3;
+import py3.export.aardio;
+
+var pyMain = py3.import("pyMain");
+var pyStr = pyMain.getHtml("https://www.aardio.com");
+mainForm.edit.print(tostring(pyStr));
+
+mainForm.plus.background = py3.export.aardio.getImage();
+
+mainForm.show();
+
+import electron.app;
+var theApp = electron.app();
+
+//这是启动electron主进程的main.js
+theApp.jsMain = /**  
+    const aardio = require('aardio')  //启动RPC服务允许调aardio/electron互调函数,创建BrowserWindow主窗口
+    const app = require('electron').app //管理electron进程的生命周期
+ 
+    /*
+     * aardio-electron 主进程已准备就绪, * 主窗口(BrowserWindow)已创建触发此事件, * 可叠加注册多个回调
+     */
+	aardio.ready( win=> { 
+		//if( !aardio.studioInvoke  ){
+			//win.removeMenu()
+		//} 
+		
+       /*
+        * 不建议用下面的代码打开调试工具, * 会有一些诡异的问题，例如不能输入中文, * 建议改为在aardio中调用 web.socket.chrome从外部打开调试工具.
+        */
+       // mainWindow.webContents.openDevTools ()  
+	} )
+
+  
+    app.on('window-all-closed', () => {
+        //app.quit();
+          
+    }) 
+**/
+// 可选在这里直接指定index.html的代码，实际开发请写到工程文件里
+theApp.html = /** 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>美图下载器</title>
+    <style type="text/css">
+        *{
+            margin:0;
+            padding: 0;
+        }
+        #bg{
+            background: url(https://bilibini.com/imgs/bg/bg.jpg) no-repeat center;
+            background-size: cover;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 1;
+            border-radius: 8px 8px 0px 0px;
+        }
+        #main {
+            position: relative;
+            display: flex;
+            width: 100%;
+            background-color: #ffffff14;
+            backdrop-filter: blur(6px);
+            top:40px;
+        }
+        .row{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content:space-between;
+            width: auto;
+            position: relative;
+        }
+        .column {
+            display: flex;
+            flex-direction: column;
+        }
+        .box {
+            margin: 15px;
+            position: relative;
+            transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+        }
+        img {
+            padding: 0;
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 11px 1px #000000ee;
+            transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+        }
+        img:hover{
+            filter: saturate(145%) brightness(95%) contrast(115%);
+        }
+        #custom-menu{
+            display: flex;
+            position:fixed;
+            height: 40px;
+            width: 100%;
+            line-height: 40px;
+            z-index: 2;
+            font-weight: 900;
+            color: #fff;
+            background-color: #6903c5;
+            border-radius: 8px 8px 0px 0px;
+            flex-direction: row;
+            justify-content:space-between;
+        }
+        #custom-menu .menu-text{
+            margin-left: 20px;
+            text-shadow: 1px 0px 4px white;
+        }
+        .menu-div{
+            margin-right: 10px;
+        }
+        .menu-div Button{
+            width: 30px;
+            height: 30px;
+            background-color: #6903c5;
+            border: #6903c5;
+            color: #fff;
+            border-radius: 20px;
+            transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+        }
+        .menu-div Button:hover{
+            width: 35px;
+            height: 35px;
+            box-shadow: 0 0 20px 0px #fff;
+            background-color: #6014a1;
+        }
+    </style>
+</head>
+<body>
+    <div id="bg"></div>
+    <div style="display: none;" id="custom-menu" onmousedown="aardio.hitCaption();return false;" >
+        <div class="menu-text"><span>美图下载器</span></div>
+        <div class="menu-div">
+            <Button type="text" >▁</Button>
+            <Button type="text" id="closed-btn" >✘</Button>
+        </div>
+    </div>
+    <div style="top:0;" id="main">
+        <div class="row">
+            <div class="box" ondblclick="onclickImg('http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg')" onclick="ondbclickImg('http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg')">
+                <img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt="">
+            </div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+            <div class="box"><img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt=""></div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        // https://v.api.aa1.cn/api/api-tplist/go.php/api/picture/index?page=2
+        // 导入aardio中的app.external 对象
+        aardio = require("aardio");
+        
+        function onclickImg(imgsrc){
+            aardio.down(imgsrc);
+        }
+        function ondbclickImg(imgsrc){
+            aardio.look(imgsrc);
+        }
+
+        function addImg(imgsrc){
+            var main=document.querySelector("#main .row");
+            var box=`<div class="box" onclick="onclickImg('${imgsrc}')"><img src="${imgsrc}" alt=""></div>`;
+            main.insertAdjacentHTML("beforeend",box);
+        }
+
+        var iNumber=0;
+
+        // 原生JS 判断整个文档滚动至底部
+        window.onscroll = ()=>{
+            // 窗口高度
+            var windowHeight = document.body.clientHeight;
+            // 页面高度
+            var documentHeight = document.body.scrollHeight;
+            // 滚动条位置
+            var scrollTop =  document.body.scrollTop;
+            if ((windowHeight + scrollTop + 2) >= documentHeight) {
+                //页面滚动到达底部
+                iNumber=iNumber+1;
+                aardio.getImg(iNumber).then((imgsrclist)=>{
+                    let imgsrclists=imgsrclist.split('||');
+                    for(let imgsrc in imgsrclists){
+                        addImg(imgsrc);
+                    }
+                })
+            }
+        }
+
+    </script>
+</body>
+</html>
+**/
+
+/*
+在下面的external对象中指定允许electron渲染进程中使用JS直接调用的函数
+下面的external 会直接转换为js中的aardio对象，在JS中require('aardio')就可以使用
+*/
+theApp.external = {
+    
+    
+    
+    down = function(imgsrc) {
+        win.msgbox(imgsrc);
+    }
+    
+    exit = function() {
+        theApp.close(); //关闭主窗口，退出程序
+    }
+    
+    //如果函数名第一个字符是$，则第一个回调参数$用于表示当前客户端,可作为xcall的参数使用
+    $test = function($) {
+        theApp.xcall($, "js函数")
+    }
+}
+
+theApp.onUrlReady = function(hSocket, url) {
+    // 加载一个页面完成都会触发这个事件
+}
+
+/*
+启动electron,下面使用一个aardio表对象指定的启动参数，
+在electron的主进程、渲染进程中都可以直接通过  aardio.startEnviron 访问。
+*/
+theApp.start(
+    
+    //electron打开的第一个页面,必须指定应用程序目录下的aardio代码文件
+    indexUrl = "/res/main.aardio";
+    
+    //指定electron创建浏览器窗口的启动参数, 可以不写,aardio会自动给出正确参数
+    browserWindow = {
+        frame = true;
+        webPreferences = {
+            nodeIntegration = true;
+        }
+    }
+    
+    /*
+    可选用args字段指定Chrome命令行参数, 必须在main.js中创建窗口以前就导入aardio模块才会生效
+    */
+    args = {
+        
+    }
+);
+
+var look = function(imgsrc) {
+	import win;
+	import electron.app;
+    var lookimg = electron.app();
+lookimg.jsMain =/**  
+    const aardio = require('aardio')  //启动RPC服务允许调aardio/electron互调函数,创建BrowserWindow主窗口
+    const app = require('electron').app //管理electron进程的生命周期
+ 
+    /*
+     * aardio-electron 主进程已准备就绪,
+     * 主窗口(BrowserWindow)已创建触发此事件,
+     * 可叠加注册多个回调
+     */
+	aardio.ready( win=> { 
+		//if( !aardio.studioInvoke  ){
+			win.removeMenu()
+		//} 
+		
+       /*
+        * 不建议用下面的代码打开调试工具,
+        * 会有一些诡异的问题，例如不能输入中文,
+        * 建议改为在aardio中调用 web.socket.chrome从外部打开调试工具.
+        */
+       // mainWindow.webContents.openDevTools ()  
+	} )
+
+  
+    app.on('window-all-closed', () => {
+        app.quit();
+          
+    }) 
+**/
+lookimg.html = /** 
+<!DOCTYPE html>
+<html> 
+  <head>
+    <meta charset="UTF-8">
+    <title>aardio嵌入electron演示</title>
+  </head>
+  
+  <body>
+  
+   <h2 onmousedown="aardio.hitCaption();return false;" 
+    	style="-webkit-user-select: none;cursor:default;">按这里调用aardio.hitCaption()拖动窗口!</h2>
+   
+   <button onclick="aardio.exit();">点这里调用aardio关闭窗口</button> <br><br>
+   
+   <button id="aardio">点这里跟aardio互调一下函数</button><br><br>
+    
+    <?
+    response.write("在electron中执行aardio代码")
+    ?>
+    
+    </body>    
+  
+    <script type="text/javascript">   
+    
+    /*导入aardio中的app.external 对象*/
+    aardio = require("aardio");
+  
+  	/*响应按钮点击事件*/
+    document.querySelector("#aardio").onclick = function(e){ 
+        
+    	//调用aardio中的函数,hello要调用的函数名字,后面可以跟任意个调用参数
+    	aardio.ex.hello( "你点击了" + e.target.innerHTML,1,2,3,"有几个参数写几个" )
+    		.then( 
+         		function(message){
+         			document.getElementById("aardio").innerText = "aardio返回值" + message;
+         		} 
+        	)
+    }
+   	
+   	/*响应aardio服务端发起的调查任务*/
+   	aardio.on("getUrl",function(){
+   		return document.location.href;
+   	});	
+   	
+    </script>
+    
+</html>
+**/
+lookimg.external = {
+    down = function(imgsrc) {
+        win.msgbox(imgsrc);
+    }
+}
+	lookimg.start(  
+    	indexUrl = "/res/look.aardio";
+    	browserWindow = {
+        	frame = true;
+    	}
+	);
+	return win.loopMessage();	 
+
+thread.create(look('a'));
+win.loopMessage();

@@ -1,0 +1,111 @@
+import win.ui;
+/*DSG{{*/
+var winform = win.form(text="图片下载";right=822;bottom=416)
+winform.add(
+button={cls="button";text="退出下载";left=658;top=383;right=781;bottom=409;z=2};
+listview={cls="listview";left=25;top=16;right=797;bottom=374;bgcolor=16777215;db=1;dl=1;dr=1;dt=1;edge=1;z=1}
+)
+/*}}*/
+
+//初始化listview控件
+winform.listview.insertColumn("网址",180);
+winform.listview.insertColumn("文件名",180);
+winform.listview.insertColumn("状态",100);
+winform.listview.insertColumn("大小",80);
+winform.listview.insertColumn("速度",80);
+winform.listview.insertColumn("已下载",120);
+winform.listview.adjust = function(cx,cy){
+    winform.listview.fillParent(1);
+}
+
+//winform.onC
+//创建下载线程管理器
+import thread.dlManager;
+var dlmgr = thread.dlManager(5/*最多允许五个线程同时下载*/);
+
+//下载开始触发
+dlmgr.onReceiveBegin = function(id,url,filename,statusText,httpStatusCode,totalSize,downSize){
+    winform.listview.setItemText( {url;filename;statusText;fsys.formatSize(totalSize);fsys.formatSize(downSize) },id )
+}
+
+//正在下载触发
+dlmgr.onReceive = function(id,sizePs,downSize){
+    winform.listview.setItemText( fsys.formatSize(downSize),id,6);
+    winform.listview.setItemText( fsys.formatSize(sizePs) + "/s" ,id,5); 
+}
+
+//下载停止触发
+dlmgr.onEnd = function(id,savepath,resumePath,contentLength){ 
+	if( savepath ){ 
+        winform.listview.setItemText(  "已完成"  ,id,3);
+        winform.listview.setItemText( fsys.formatSize(contentLength),id,4);
+    }
+    else {
+        winform.listview.setItemText(  "已停止"  ,id,3);
+    }
+    
+    winform.listview.setItemText(  "0KB/s"  ,id,5);
+    winform.listview.setItemText( "",id,6); 
+    //fsys.delete(resumePath)
+}
+
+//下载出错触发
+dlmgr.onError = function(id,err){
+    winform.listview.setItemText( err,id,3);
+}
+
+//下载任务右键管理菜单
+import win.ui.menu;
+winform.listview.onnotify = function(id,code,ptr){  
+      if( code = 0xFFFFFFFB/*_NM_RCLICK*/ ){
+      
+          var x,y = win.getMessagePos();  
+          var nmListView = winform.listview.getNotifyMessage(code,ptr);
+          
+          //创建弹出菜单
+        var popmenu = win.ui.popmenu(winform); 
+        popmenu.add('取消',function(id){ 
+            dlmgr.cancel( nmListView.iItem )
+        } )
+        popmenu.popup(x,y,true);
+        popmenu.close();
+      }
+}
+
+//关闭窗体时
+winform.onClose = function(hwnd,message,wParam,lParam){
+    winform.hitMin();
+    return true; 
+}
+
+//开始下载
+var downImgFunc=function(imgsrc){
+	dlmgr.push( 
+        id = winform.listview.addItem(imgsrc);
+        url = imgsrc;
+        savedir = "/download/"; 
+    );
+}
+//关闭停止所有下载
+var closeImgFunc=function(){
+	import thread.event;
+	winform.text = "正在等待关闭"; 
+    dlmgr.quit();
+    winform.onClose=null;
+    winform.close();
+}
+
+
+
+
+winform.button.oncommand = function(id,event){
+	winform.onClose=null;
+	winform.close();
+}
+
+subscribe("downImgFunc", downImgFunc);
+subscribe("closeImgFunc", closeImgFunc);
+winform.show();
+
+win.loopMessage();
+return winform;

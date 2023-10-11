@@ -1,0 +1,74 @@
+import win.ui;
+import console;
+import web.view;
+import electron.app;
+import wsock.tcp.simpleHttpServer;
+import py3;
+/*DSG{{*/
+mainForm = win.form(text="图片下载器";right=959;bottom=591;border="dialog frame")
+mainForm.add(
+custom={cls="custom";text="自定义控件";left=4;top=2;right=955;bottom=592;db=1;dl=1;dr=1;dt=1;z=1}
+)
+/*}}*/
+
+var downWinForm;
+var addDowntoWinForm=function(imgsrc){
+	import win.ui;
+	if(!(downWinForm and downWinForm.valid)){
+		downWinForm=mainForm.loadForm("\dlg\down.aardio",mainForm);
+		downWinForm.show();
+	}
+	downWinForm.publish("downImgFunc",imgsrc);
+}
+
+var creaLook=function(imgsrc) {
+		import win;
+		import win.ui;
+		import web.view;
+		import electron.app;
+		import wsock.tcp.simpleHttpServer; 
+    	var winform = win.form(text="图片查看");
+    	var lookimg = web.view(winform);
+    	lookimg.external = {
+        	down = function(imgsrc) {
+        		addDowntoWinForm(imgsrc);	
+        	}
+        	getImgsrc=function() {
+            	return imgsrc; 
+        	}
+    	}
+    	lookimg.go("\res\look.html");
+    	winform.show();
+    	win.loopMessage();
+ 	}
+
+var pyMain=py3.import("pyMain");
+var theApp = electron.app(mainForm.custom);
+theApp.external = {
+	look = function(imgsrc){
+		thread.create(creaLook(imgsrc));
+	}
+	lookEND = function(imgsrc){
+		return true; 
+	}
+    down = function(imgsrc) {
+        addDowntoWinForm(imgsrc);
+    }
+    getImg=function(iNumber){
+    	return pyMain.getImgSrc(iNumber); 
+    }
+    exit = function() {
+        theApp.close();
+    }  
+}
+theApp.start("/res/index.aardio");
+
+mainForm.onClose = function(hwnd,message,wParam,lParam){
+    if(downWinForm and downWinForm.valid){
+		downWinForm.publish("closeImgFunc");
+	}
+}
+import win.ui.shadow;
+win.ui.shadow(mainForm);
+mainForm.show();
+win.loopMessage();

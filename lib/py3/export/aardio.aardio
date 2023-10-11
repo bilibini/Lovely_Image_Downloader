@@ -1,0 +1,17 @@
+﻿import py3;
+
+//py3.export 的成员表在 Python 中都是可用 import 语句导入的模块
+py3.export.aardio = { 
+	setImage = function(bytes){ 
+		self.$bytes = bytes;
+		..publish("py3.showImage",bytes)
+	};
+	getImage = function(){
+		return self.$bytes;
+	};
+}
+
+/**intellisense(py3.export.aardio)
+setImage(.(bytes) = 设置图像数据
+getImage() = 获取图像数据
+end intellisense**/

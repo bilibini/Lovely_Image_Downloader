@@ -1,0 +1,29 @@
+import py3.pip;//如果程序中用的是 py3.10，这一句也要改为 py3.10.pip
+py3.pip.setIndexUrl("aliyun");//切换国内镜像源，参数为空恢复
+
+/*
+进程外安装模块到 /py/Python+版本号/site-packages 目录，
+多个 pip 参数用逗号分开（用法与原版一样），含空格参数自动加双引号，并根据需要自动处理转义。
+*/
+py3.pip.process("install","requests"); 
+py3.pip.process("install","json");
+
+//用一个空格分开所有参数的字符串也可以，其他参数用法与原版 pip 一样
+//py3.pip.process("install 模块名称"); 
+
+//进程内安装模块(不适用安装时误将 aardio.exe 作为 python.exe 启动的模块)
+//py3.pip("install","模块名称");
+//py3.pip("install 模块名称"); 
+
+/*
+获取帮助：
+-------------------------------------
+1、查看 py3.pip 的智能提示
+2、查看 py3.pip 的库函数文档
+3、查看 py3.pip 的源代码
+
+相关教程与文档：
+-------------------------------------
+https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzA3Njc1MDU0OQ==&action=getalbum&album_id=2270340412479438855#wechat_redirect
+https://pip.pypa.io/en/stable/cli/pip_install/
+*/

@@ -1,0 +1,93 @@
+import win.ui;
+import web.view;
+
+var creaWeb=function(strr){
+	import win
+	import win.ui;
+	import web.view;
+	//win.msgbox('bbb');
+	var winform = win.form(text="aardio工程22");
+	//win.msgbox('ccc');
+	var wb=web.view(winform);
+	//win.msgbox('ddd');
+	wb.html=/**
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+</head>
+<body>
+	<h1>这个窗口只有在electron.app()创建的对象以外调用才能创建出来，不知道为什么，求大佬解疑，感谢∠( °ω°)／</h1>
+    <script type="text/javascript">
+        function onclickImg(strr){
+            aardio.down(strr);
+        }
+        function addDom(strr){
+            var box=`<h1>${strr}</h1><div><button onclick="onclickImg('${strr}')">打开弹窗</button></div>`;
+            document.body.insertAdjacentHTML("beforeend",box);
+        }
+        aardio.getstrr().then((strr)=>{addDom(strr)});
+    </script>
+</body>
+</html>
+		**/
+	wb.external = {
+        down = function(strr) {
+            win.msgbox(strr);
+        }
+        getstrr=function() {
+            return strr; 
+        }
+    }
+    winform.show();
+	win.loopMessage();
+}
+
+var mainForm = win.form(text="主窗口");
+mainForm.add( 
+	button = { 
+		cls="button";bottom=164;right=147;left=8;top=123;z=1;text="自定义ID控件";id=123;autoResize=false;
+	}; 
+)
+var mainweb=web.view(mainForm);
+mainweb.external = {
+	look = function(strr){
+		creaWeb('bbb');
+		return 'abbc';
+	}
+	lll=function(){
+		win.msgbox("aaa")
+	}
+	
+}
+mainweb.html=/**
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>测试主窗口</title>
+</head>
+<body>
+	<button onclick="onclickImg('aaabbb')">创建新的electron窗口</button>
+    <script type="text/javascript">
+    (async ()=>{
+    	//function onclickImg(strr){
+    	   //aardio.lll();
+           aardio.look('aaa');
+           //alert('aaa');
+           await aardio.look('aaa').then((a)=>{alert(a);});
+        //}
+    })()
+        
+    </script>
+</body>
+</html>
+
+**/
+
+mainForm.show();
+//thread.create(creaWeb('bbb'));
+mainForm.button.oncommand = function(id,event){
+	creaWeb('bbb');
+}
+win.loopMessage();
+
