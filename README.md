@@ -1,2 +1,6 @@
 # Lovely_Image_Downloader
 一个简单的美图下载器，使用aardio+electron+webview+python实现，主要用作练手
+上班在公司摸鱼，闲的没事，发现aardio+python项目实现起来很方便，打算随便做一个软件练练手，于是便有了这个软件。
+有些地方功能实现是为了练手而写的，其实光纯aardio编写也可以完成功能，但是由于有前端和python基础所以就用webview+python实现功能然后用aardio将其结合起来。
+界面主要使用前端技术，图片数据获取使用python。
+（因为是练手所以直接用的网上免费图片api，就没去做爬数据的功能，可能未来api会失效，有需求的朋友可以自行修改api或者重写python代码就行）
