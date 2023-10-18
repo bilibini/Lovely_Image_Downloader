@@ -4,6 +4,7 @@ import web.view;
 import electron.app;
 import wsock.tcp.simpleHttpServer;
 import py3;
+//import py3.lib.bs4;
 /*DSG{{*/
 mainForm = win.form(text="图片下载器";right=959;bottom=591;border="dialog frame")
 mainForm.add(

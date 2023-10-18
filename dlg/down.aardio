@@ -1,4 +1,5 @@
 import win.ui;
+import win;
 /*DSG{{*/
 var winform = win.form(text="图片下载";right=822;bottom=416)
 winform.add(
@@ -8,7 +9,7 @@ listview={cls="listview";left=25;top=16;right=797;bottom=374;bgcolor=16777215;db
 /*}}*/
 
 //初始化listview控件
-winform.listview.insertColumn("网址",180);
+//winform.listview.insertColumn("网址",180);
 winform.listview.insertColumn("文件名",180);
 winform.listview.insertColumn("状态",100);
 winform.listview.insertColumn("大小",80);
@@ -25,33 +26,37 @@ var dlmgr = thread.dlManager(5/*最多允许五个线程同时下载*/);
 
 //下载开始触发
 dlmgr.onReceiveBegin = function(id,url,filename,statusText,httpStatusCode,totalSize,downSize){
-    winform.listview.setItemText( {url;filename;statusText;fsys.formatSize(totalSize);fsys.formatSize(downSize) },id )
+   	import win;
+   	win.msgbox(id);
+    winform.listview.setItemText( {filename;statusText;fsys.formatSize(totalSize);fsys.formatSize(downSize) },id );
+    
+    
 }
 
 //正在下载触发
 dlmgr.onReceive = function(id,sizePs,downSize){
-    winform.listview.setItemText( fsys.formatSize(downSize),id,6);
-    winform.listview.setItemText( fsys.formatSize(sizePs) + "/s" ,id,5); 
+    winform.listview.setItemText( fsys.formatSize(downSize),id,5);
+    winform.listview.setItemText( fsys.formatSize(sizePs) + "/s" ,id,4); 
 }
 
 //下载停止触发
 dlmgr.onEnd = function(id,savepath,resumePath,contentLength){ 
 	if( savepath ){ 
-        winform.listview.setItemText(  "已完成"  ,id,3);
-        winform.listview.setItemText( fsys.formatSize(contentLength),id,4);
+        winform.listview.setItemText(  "已完成"  ,id,2);
+        winform.listview.setItemText( fsys.formatSize(contentLength),id,3);
     }
     else {
-        winform.listview.setItemText(  "已停止"  ,id,3);
+        winform.listview.setItemText(  "已停止"  ,id,2);
     }
     
-    winform.listview.setItemText(  "0KB/s"  ,id,5);
-    winform.listview.setItemText( "",id,6); 
+    winform.listview.setItemText(  "0KB/s"  ,id,4);
+    winform.listview.setItemText( "",id,5); 
     //fsys.delete(resumePath)
 }
 
 //下载出错触发
 dlmgr.onError = function(id,err){
-    winform.listview.setItemText( err,id,3);
+    winform.listview.setItemText( err,id,2);
 }
 
 //下载任务右键管理菜单
@@ -81,8 +86,9 @@ winform.onClose = function(hwnd,message,wParam,lParam){
 //开始下载
 var downImgFunc=function(imgsrc){
 	dlmgr.push( 
-        id = winform.listview.addItem(imgsrc);
+        id = winform.listview.addItem(string.right(imgsrc,36));
         url = imgsrc;
+        filename=string.right(imgsrc,36);
         savedir = "/download/"; 
     );
 }

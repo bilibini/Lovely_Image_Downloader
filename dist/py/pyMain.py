@@ -1,12 +1,20 @@
 import requests
 import json
+from bs4 import BeautifulSoup
+import cryptocode
+from fake_useragent import UserAgent
 # import aardio
 
 def getImgSrc(iNumber=1):
-    res = requests.get(f"https://v.api.aa1.cn/api/api-tplist/go.php/api/picture/index?page={iNumber}",verify=False)
-    print(res.text)
-    data=json.loads(res.text)['data']
-    print(data)
-    ImgSrclist=['||'.join(pics['pics']) for pics in data]
-    return '||'.join(ImgSrclist) 
+    iNumber=int(iNumber)
+    url=cryptocode.decrypt('RPmitKoyxkGWT3rNdSIdllrKpBQkM2iXv4Gk*3fceH6rrhEDqRfiurc1k/g==*A/Ria0ZdrIKsY1wDa9zFJQ==*1ehaomVX+IvEYaQ4AtJtSQ==','bilibini')
+    head={
+        "User-Agent": UserAgent().random
+    }
+    res = requests.get(f"{url}/list-{iNumber}.html",headers=head,verify=False)
+    soup = BeautifulSoup(res.text, 'html.parser')
+    imgList=soup.select("article > div > div.zhuanti.whitebg.waterfall > ul > li > i > a > img")
+    imgSrcList=[img.attrs['src'] for img in imgList]
+    return '||'.join(imgSrcList)
 
+# print(getImgSrc(1))

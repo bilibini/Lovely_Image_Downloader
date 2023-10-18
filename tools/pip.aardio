@@ -7,6 +7,12 @@ py3.pip.setIndexUrl("aliyun");//切换国内镜像源，参数为空恢复
 */
 py3.pip.process("install","requests"); 
 py3.pip.process("install","json");
+py3.pip.process("install","pycryptodome");
+py3.pip.process("install","simple-crypt");
+py3.pip.process("install","cryptocode");
+py3.pip.process("install","beautifulsoup4");
+py3.pip.process("install","fake-useragent");
+
 
 //用一个空格分开所有参数的字符串也可以，其他参数用法与原版 pip 一样
 //py3.pip.process("install 模块名称"); 

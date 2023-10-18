@@ -109,21 +109,22 @@
     </div>
     <div style="top:0;" id="main">
         <div class="row">
-            <div class="box" oncontextmenu="down('http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg')" onclick="onclickImg('http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg')">
+            <!--div class="box" oncontextmenu="down('http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg')" onclick="onclickImg('http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg')">
                 <img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt="">
-            </div>
+            </div-->
         </div>
     </div>
     <script type="text/javascript">
-        // https://v.api.aa1.cn/api/api-tplist/go.php/api/picture/index?page=2
         const aardio = require('aardio');
         const app = require('electron').app;
         
         function onclickImg(imgsrc){
+            imgsrc=imgsrc.replace("pic_360","pic");
             aardio.look(imgsrc);
             aardio.lookEND();
         }
         function down(imgsrc){
+            imgsrc=imgsrc.replace("pic_360","pic");
             aardio.down(imgsrc);
         }
         function addImg(imgsrc){
