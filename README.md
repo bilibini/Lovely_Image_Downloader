@@ -34,6 +34,6 @@
 界面主要使用前端技术，图片数据获取使用python。  
 （因为是练手所以直接用的网上免费图片api，就没去做爬数据的功能，可能未来api会失效，有需求的朋友可以自行修改api或者重写python代码就行）  
 ### 软件界面
-![软件主界面](https://im.gurl.eu.org/file/248d93d8f7535ddba3cee.jpg)  
+![软件主界面](https://im.gurl.eu.org/file/01cfcf6827171b9b73be8.jpg)  
 ![图片查看界面](https://im.gurl.eu.org/file/77f0bb1bfc2c7154892be.jpg)
 
