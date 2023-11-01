@@ -1,0 +1,141 @@
+*{
+    margin:0;
+    padding: 0;
+}
+#bg{
+    background: url(bg.png) no-repeat center;
+    -o-background-size: cover;
+       background-size: cover;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    border-radius: 8px 8px 0px 0px;
+    z-index: -2;
+}
+.bgop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff69;
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+    z-index: -1;
+}
+#main {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    top:40px;
+}
+.row{
+    -webkit-column-count: 5;
+       -moz-column-count: 5;
+            column-count: 5;
+    -webkit-column-gap: 15px;
+       -moz-column-gap: 15px;
+            column-gap: 15px;
+}
+.column {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+       -moz-box-orient: vertical;
+       -moz-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+}
+.box {
+    margin-top: 10px;
+    position: relative;
+    -webkit-transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+    -o-transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+    -moz-transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+    transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+}
+img {
+    padding: 0;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 3px 1px #000000ee;
+            box-shadow: 0 0 3px 1px #000000ee;
+    -webkit-transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+    -o-transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+    -moz-transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+    transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+}
+img:hover{
+    -webkit-filter: saturate(160%) brightness(100%) contrast(135%);
+            filter: saturate(160%) brightness(100%) contrast(135%);
+    -webkit-box-shadow: 0 0 11px 1px #000000ee;
+            box-shadow: 0 0 11px 1px #000000ee;
+}
+#custom-menu{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    position:fixed;
+    height: 40px;
+    width: 100%;
+    line-height: 40px;
+    z-index: 2;
+    font-weight: 900;
+    color: #fff;
+    background-color: #6903c5;
+    border-radius: 8px 8px 0px 0px;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+       -moz-box-orient: horizontal;
+       -moz-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack:justify;
+    -webkit-justify-content:space-between;
+       -moz-box-pack:justify;
+        -ms-flex-pack:justify;
+            justify-content:space-between;
+}
+#custom-menu .menu-text{
+    margin-left: 20px;
+    text-shadow: 1px 0px 4px white;
+}
+.menu-div{
+    margin-right: 10px;
+}
+.menu-div Button{
+    width: 30px;
+    height: 30px;
+    background-color: #6903c5;
+    border: #6903c5;
+    color: #fff;
+    border-radius: 20px;
+    -webkit-transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+    -o-transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+    -moz-transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+    transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+}
+.menu-div Button:hover{
+    width: 35px;
+    height: 35px;
+    -webkit-box-shadow: 0 0 20px 0px #fff;
+            box-shadow: 0 0 20px 0px #fff;
+    background-color: #6014a1;
+}
