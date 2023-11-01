@@ -1,0 +1,31 @@
+import fonts.fontAwesome;
+import win.ui;
+import web.view;
+/*DSG{{*/
+var winform = win.form(text="aardio form";right=816;bottom=497)
+winform.add(
+plus={cls="plus";text="下载";left=349;top=391;right=469;bottom=431;bgcolor=-5197169;db=1;dl=1;dr=1;font=LOGFONT(h=-13);iconStyle={font=LOGFONT(h=-13;name='FontAwesome');padding={right=33}};iconText='\uF019';notify=1;textPadding={left=13};z=1}
+)
+/*}}*/
+
+winform.plus.skin({
+	background={
+		default=0x668FB2B0;
+		disabled=0xFFCCCCCC;
+		hover=0xFF928BB3
+	};
+	color={
+		default=0xFF000000;
+		disabled=0x8C6D6D6D
+	};
+})
+winform.plus.border = {radius=15}
+
+var lookimg = web.view(winform);
+lookimg.go(g_imgurl);
+g_addDowntoWinForm(lookimg.location);
+
+
+winform.show();
+win.loopMessage();
+return winform;
