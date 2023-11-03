@@ -10,14 +10,17 @@ mainForm.add()
 /*}}*/
 
 g_imgurl='';
+g_errurl='';
 
 g_downWinForm=null;
 g_addDowntoWinForm=function(imgsrc){
 	import win.ui;
+	import win.dlg.message;
 	if(!(g_downWinForm and g_downWinForm.valid)){
 		g_downWinForm=mainForm.loadForm("\dlg\down.aardio",mainForm);
 		g_downWinForm.show();
 	}
+	g_downWinForm.msgOk('添加下载成功',200)
 	g_downWinForm.publish("downImgFunc",imgsrc);
 }
 
@@ -25,25 +28,32 @@ g_addDowntoWinForm=function(imgsrc){
 
 var pyMain=py3.import("pyMain");
 var theApp = web.view(mainForm);
+theApp.enableDefaultContextMenus(false);
+theApp.enableDevTools(false);
 theApp.external = {
 	look = function(imgsrc){
 		g_imgurl=imgsrc;
 		mainForm.loadForm("\dlg\picture.aardio")
 	}
-	lookEND = function(imgsrc){
+	lookEND = function(){
 		return true; 
 	}
     down = function(imgsrc) {
-        addDowntoWinForm(imgsrc);
+        g_addDowntoWinForm(imgsrc);
     }
     getImg=function(iNumber){
-    	return pyMain.getImgSrc(iNumber); 
+        import win.dlg.message;
+        mainForm.msgInfo('正在加载图片……',150)
+    	return  web.json.stringify(pyMain.getImgSrc(iNumber));
     }
     exit = function() {
         theApp.close();
     }  
 }
+theApp.go("\res\err.png");
+g_errurl=theApp.location;
 theApp.go("/res/main.html");
+
 
 mainForm.onClose = function(hwnd,message,wParam,lParam){
     if(g_downWinForm and g_downWinForm.valid){

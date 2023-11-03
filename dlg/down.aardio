@@ -27,7 +27,6 @@ var dlmgr = thread.dlManager(5/*最多允许五个线程同时下载*/);
 //下载开始触发
 dlmgr.onReceiveBegin = function(id,url,filename,statusText,httpStatusCode,totalSize,downSize){
    	import win;
-   	win.msgbox(id);
     winform.listview.setItemText( {filename;statusText;fsys.formatSize(totalSize);fsys.formatSize(downSize) },id );
     
     

@@ -36,6 +36,6 @@
 ~（因为是练手所以直接用的网上免费图片api，就没去做爬数据的功能，可能未来api会失效，有需求的朋友可以自行修改api或者重写python代码就行）~ (已经更新代码，爬取网站图片，只要图片网站不倒就可以一直用)  
 
 ### 软件界面
-![软件主界面](https://im.gurl.eu.org/file/01cfcf6827171b9b73be8.jpg)  
-![图片查看界面](https://im.gurl.eu.org/file/77f0bb1bfc2c7154892be.jpg)
+![软件主界面](https://z1.ax1x.com/2023/11/03/piMsfjP.jpg)  
+![图片查看界面](https://z1.ax1x.com/2023/11/03/piMs4nf.jpg)
 

@@ -1,16 +1,17 @@
 import fonts.fontAwesome;
 import win.ui;
-import web.view;
+import web.form;
+import win.dlg.message;
 /*DSG{{*/
-var winform = win.form(text="aardio form";right=816;bottom=497)
+var winform = win.form(text="图片查看";right=816;bottom=497)
 winform.add(
-plus={cls="plus";text="下载";left=349;top=391;right=469;bottom=431;bgcolor=-5197169;db=1;dl=1;dr=1;font=LOGFONT(h=-13);iconStyle={font=LOGFONT(h=-13;name='FontAwesome');padding={right=33}};iconText='\uF019';notify=1;textPadding={left=13};z=1}
+plus={cls="plus";text="下载";left=352;top=368;right=483;bottom=415;bgcolor=15793151;db=1;font=LOGFONT(h=-16);iconStyle={font=LOGFONT(h=-13;name='FontAwesome');padding={right=33}};iconText='\uF019';notify=1;textPadding={left=13};z=1}
 )
 /*}}*/
 
 winform.plus.skin({
 	background={
-		default=0x668FB2B0;
+		default=0x668FB200;
 		disabled=0xFFCCCCCC;
 		hover=0xFF928BB3
 	};
@@ -19,12 +20,54 @@ winform.plus.skin({
 		disabled=0x8C6D6D6D
 	};
 })
-winform.plus.border = {radius=15}
+winform.plus.border = {radius=2}
 
-var lookimg = web.view(winform);
-lookimg.go(g_imgurl);
-g_addDowntoWinForm(lookimg.location);
+var wb = web.form(winform);
+wb.noScriptErr = true;
+wb.showMenu = lambda() false; 
+var imgurl=g_imgurl;
+var html=`
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+        .parent{
+            display: flex;
+            flex-flow: row;
+            justify-content: center;
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+    </div>
+    <script>
+        function checkWebpSupport(){
+        return document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') == 0;
+        }
+        var main=document.querySelector(".parent");
+        var box='';
+        var imgurl='`+imgurl+`';
+        var errurl='`+g_errurl+`';
+        if(imgurl.indexOf('.webp')==-1||checkWebpSupport()){
+            box='<img src="'+imgurl+'">';
+        }
+        else{
+            box='<img src="'+errurl+'">';
+        }
+        main.insertAdjacentHTML("beforeend",box);
+    </script>
+</body>
+</html>`
 
+wb.html=html
+
+
+winform.plus.oncommand = function(id,event){
+	g_addDowntoWinForm(imgurl);
+}
 
 winform.show();
 win.loopMessage();
