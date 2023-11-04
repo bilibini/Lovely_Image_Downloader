@@ -78,7 +78,7 @@ def getimgList_2(iNumber=1):
                 imgDataList.append(imgData)
             return imgDataList
         url1=f'https://bizhi.cheetahfun.com/dtag_20470/index_{iNumber}.shtml'
-        url2=f'https://bizhi.cheetahfun.com/sj/c3d/p{iNumber}'
+        url2=f'https://bizhi.cheetahfun.com/dn/c3j/p{iNumber}'
         imgjsonlist=get(url1)+get(url2)
     except :
         imgjsonlist=[{
