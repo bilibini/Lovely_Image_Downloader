@@ -22,27 +22,27 @@ def getImgSrc_EX(iNumber=1):
 def getimgList_1(iNumber=2):
     iNumber=int(iNumber)+1
     imgjsonlist=[]
-    try:
-        def get(url):
-            head={
-                "User-Agent": UserAgent().random
+    def get(url):
+        head={
+            "User-Agent": UserAgent().random
+        }
+        res = requests.get(url,headers=head,verify=False)
+        res.encoding='gbk'
+        soup = BeautifulSoup(res.text, 'html.parser')
+        imgList=soup.select("#main > div.list > ul > li > a > img")
+        imgDataList=[]
+        for img in imgList:
+            imgData={
+                'url':'',
+                'smallurl':'',
+                'title':'小陆离 可爱女孩 可爱 护眼 一手托着下巴的美女壁纸'
             }
-            res = requests.get(url,headers=head,verify=False)
-            res.encoding='gbk'
-            soup = BeautifulSoup(res.text, 'html.parser')
-            imgList=soup.select("#main > div.list > ul > li > a > img")
-            imgDataList=[]
-            for img in imgList:
-                imgData={
-                    'url':'',
-                    'smallurl':'',
-                    'title':'小陆离 可爱女孩 可爱 护眼 一手托着下巴的美女壁纸'
-                }
-                imgData['smallurl']=img.attrs['src']
-                imgData['title']=img.attrs['alt']
-                imgData['url']=re.findall(r'(.*)small.*',img.attrs['src'])[0]+re.findall(r'.*small([0-9A-Za-z]{11}).*',img.attrs['src'])[0]+'.jpg'
-                imgDataList.append(imgData)
-            return imgDataList
+            imgData['smallurl']=img.attrs['src']
+            imgData['title']=img.attrs['alt']
+            imgData['url']=re.findall(r'(.*)small.*',img.attrs['src'])[0]+re.findall(r'.*small([0-9A-Za-z]{11}).*',img.attrs['src'])[0]+'.jpg'
+            imgDataList.append(imgData)
+        return imgDataList
+    try:
         url1=f'http://www.netbian.com/meinv/index_{iNumber}.htm'
         url2=f'http://www.netbian.com/shouji/meinv/index_{iNumber}.htm'
         imgjsonlist=get(url1)+get(url2)
@@ -57,27 +57,27 @@ def getimgList_1(iNumber=2):
 def getimgList_2(iNumber=1):
     iNumber=int(iNumber)
     imgjsonlist=[]
-    try:
-        def get(url):
-            head={
-                "user-agent": UserAgent().random
+    def get(url):
+        head={
+            "user-agent": UserAgent().random
+        }
+        res = requests.get(url,headers=head,stream=True,timeout=(5,5),verify=False)
+        soup = BeautifulSoup(res.text, 'html.parser')
+        imgList=soup.select("main div div section ul li div a img")
+        imgDataList=[]
+        for img in imgList:
+            imgData={
+                'url':'',
+                'smallurl':'',
+                'title':'小陆离 可爱女孩 可爱 护眼 一手托着下巴的美女壁纸'
             }
-            res = requests.get(url,headers=head,stream=True,timeout=(5,5),verify=False)
-            soup = BeautifulSoup(res.text, 'html.parser')
-            imgList=soup.select("main > div > div > section > ul > li > div > a > img")
-            imgDataList=[]
-            for img in imgList:
-                imgData={
-                    'url':'',
-                    'smallurl':'',
-                    'title':'小陆离 可爱女孩 可爱 护眼 一手托着下巴的美女壁纸'
-                }
-                imgData['smallurl']=img.attrs['src']
-                imgData['title']=img.attrs['alt']
-                imgData['url']=img.attrs['src'].split('?x-oss')[0]
-                imgDataList.append(imgData)
-            return imgDataList
-        url1=f'https://bizhi.cheetahfun.com/dtag_20470/index_{iNumber}.shtml'
+            imgData['smallurl']=img.attrs['src']
+            imgData['title']=img.attrs['alt']
+            imgData['url']=img.attrs['src'].split('?x-oss')[0]
+            imgDataList.append(imgData)
+        return imgDataList
+    try:
+        url1=f'https://bizhi.cheetahfun.com/sj/c3j/p{iNumber}'
         url2=f'https://bizhi.cheetahfun.com/dn/c3j/p{iNumber}'
         imgjsonlist=get(url1)+get(url2)
     except :
@@ -88,6 +88,46 @@ def getimgList_2(iNumber=1):
         }]
     return imgjsonlist
 
+def getSearchImgList(text='黑丝',iNumber=1):
+    iNumber=int(iNumber)
+    imgjsonlist=[]
+    def get(url):
+        head={
+            "user-agent": UserAgent().random
+        }
+        res = requests.get(url,headers=head,stream=True,timeout=(5,5),verify=False)
+        soup = BeautifulSoup(res.text, 'html.parser')
+        imgList=soup.select("main div section ul li div a")
+        imgDataList=[]
+        for img in imgList:
+            imgData={
+                'url':'',
+                'smallurl':'',
+                'title':'小陆离 可爱女孩 可爱 护眼 一手托着下巴的美女壁纸'
+            }
+            img.select('img')
+            if len(img.select('img'))==0:
+                continue
+            elif len(img.select('img'))==1:
+                img=img.select('img')[0]
+            else:
+                img=img.select('img')[1]
+            imgData['smallurl']=img.attrs['src']
+            imgData['title']=img.attrs['alt']
+            imgData['url']=img.attrs['src'].split('?x-oss')[0]
+            imgDataList.append(imgData)
+        return imgDataList
+    try:
+        url1=f'https://bizhi.cheetahfun.com/search.html?search={text}&page={iNumber}'
+        url2=f'https://bizhi.cheetahfun.com/sj/search.html?search={text}&page={iNumber}'
+        imgjson=get(url1)+get(url2)
+    except:
+        imgjson=[{
+            'url':'err.png',
+           'smallurl':'err.png',
+            'title':'数据加载错误'
+        }]
+    return imgjson
 
 def getImgSrc(iNumber=1):
     iNumber=int(iNumber)
@@ -98,5 +138,5 @@ def getImgSrc(iNumber=1):
 
 
 
-# print(getImgSrc(1))
+# print(getSearchImgList())
 
