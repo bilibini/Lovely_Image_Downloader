@@ -4,8 +4,7 @@
 }
 #bg{
     background: url(bg.png) no-repeat center;
-    -o-background-size: cover;
-       background-size: cover;
+    background-size: cover;
     overflow: hidden;
     position: fixed;
     top: 0;
@@ -23,73 +22,159 @@
     width: 100%;
     height: 100%;
     background-color: #ffffff69;
-    -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     z-index: -1;
 }
+/* 搜索 */
+#search{
+    top: 0;
+    left: 0;
+}
+#search .search-logo{
+    position: absolute;
+    bottom: 5%;
+    right: 15px;
+    width: 55px;
+    height: 55px;
+    background-color: #670465;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 0 3px 1px #000000ee;
+    transition: 0.25s all;
+}
+#search .search-logo:hover{
+    transform: rotate(45deg);
+}
+#search .search-box{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    display: none;
+    transition: all .5s;
+    position: fixed;
+}
+#search .search-box .search-main{
+    margin: 20px;
+    background-color: #ffffffeb;
+    max-height: calc(100% - 40px);
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: relative;
+}
+#search .search-box .search-main .search-bar{
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#search-input{
+    height: 32px;
+    width: 395px;
+    text-align: left;
+    bottom: 0;
+    font-size: 18px;
+    border: 1px solid #b9b9b9;
+    border-radius: 1px;
+    padding-left: 15px;
+    margin-right: 5px;
+}
+#search-btn{
+    height: 32px;
+    line-height: 32px;
+    background-color: #670465;
+    box-shadow: none;
+    font-weight: 400;
+    border: 0;
+    outline: 0;
+    letter-spacing: normal;
+    color: #fff;
+    border-radius: 4px;
+    padding: 1px 25px;
+}
+#search .search-box .search-main .search-tab{
+    margin: 10px;
+    margin-left: -70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#search .search-box .search-main .search-tab .labe{
+    margin: 0px 4px;
+    border: #00000036 solid 1px;
+    border-radius: 4px;
+    padding: 2px 10px;
+    font-size: 14px;
+    font-weight: 900;
+    color: #000000ee;
+    height: 20px;
+    transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+}
+#search .search-box .search-main .search-tab .labe:hover{
+    margin-top: -5px;
+    box-shadow: #0000008c 2px 3px 7px 0px;
+}
+#search .search-box .search-main .search-pic{
+    height: calc(100% - 145px);
+    overflow-y: scroll;
+    display: block;
+}
+#search .search-box .search-main .close-btn{
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 20px;
+    transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+}
+#search .search-box .search-main .close-btn:hover{
+    top: 8px;
+    text-shadow: 2px 2px 6px black;
+}
+
 #main {
     position: relative;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
     display: flex;
     width: 100%;
     top:40px;
 }
 .row{
-    -webkit-column-count: 5;
-       -moz-column-count: 5;
-            column-count: 5;
-    -webkit-column-gap: 15px;
-       -moz-column-gap: 15px;
-            column-gap: 15px;
+    column-count: 6;
+    column-gap: 15px;
+}
+.searchrow{
+    margin: 10px 35px;
+    column-count: 5;
 }
 .column {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-       -moz-box-orient: vertical;
-       -moz-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    flex-direction: column;
 }
-.box {
+.box{
     margin-top: 10px;
+    box-shadow: 0 0 3px 1px #000000ee;
     position: relative;
-    -webkit-transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
-    -o-transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
-    -moz-transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+    border-radius: 10px;
     transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
 }
-img {
+.box:hover{
+    filter: saturate(140%) brightness(90%) contrast(110%);
+    box-shadow: 0 0 11px 1px #000000ee;
+}
+.box img{
     padding: 0;
     width: 100%;
     height: auto;
-    border-radius: 7px;
-    -webkit-box-shadow: 0 0 3px 1px #000000ee;
-            box-shadow: 0 0 3px 1px #000000ee;
-    -webkit-transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
-    -o-transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
-    -moz-transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
-    transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
+    border-radius: 10px;
 }
-img:hover{
-    -webkit-filter: saturate(160%) brightness(100%) contrast(135%);
-            filter: saturate(160%) brightness(100%) contrast(135%);
-    -webkit-box-shadow: 0 0 11px 1px #000000ee;
-            box-shadow: 0 0 11px 1px #000000ee;
+
+.box:first-child{
+    margin-top: 0px;
 }
 #custom-menu{
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
     display: flex;
     position:fixed;
     height: 40px;
@@ -100,18 +185,8 @@ img:hover{
     color: #fff;
     background-color: #6903c5;
     border-radius: 8px 8px 0px 0px;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-       -moz-box-orient: horizontal;
-       -moz-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-pack:justify;
-    -webkit-justify-content:space-between;
-       -moz-box-pack:justify;
-        -ms-flex-pack:justify;
-            justify-content:space-between;
+    flex-direction: row;
+    justify-content:space-between;
 }
 #custom-menu .menu-text{
     margin-left: 20px;
@@ -127,15 +202,11 @@ img:hover{
     border: #6903c5;
     color: #fff;
     border-radius: 20px;
-    -webkit-transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
-    -o-transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
-    -moz-transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
     transition: 0.25s all cubic-bezier(0, 0.79, 0.49, 1.46);
 }
 .menu-div Button:hover{
     width: 35px;
     height: 35px;
-    -webkit-box-shadow: 0 0 20px 0px #fff;
-            box-shadow: 0 0 20px 0px #fff;
+    box-shadow: 0 0 20px 0px #fff;
     background-color: #6014a1;
 }
