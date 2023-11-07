@@ -88,7 +88,7 @@ def getimgList_2(iNumber=1):
         }]
     return imgjsonlist
 
-def getSearchImgList(text='黑丝',iNumber=1):
+def getSearchImgSrc(text='黑丝',iNumber=1):
     iNumber=int(iNumber)
     imgjsonlist=[]
     def get(url):
@@ -121,6 +121,7 @@ def getSearchImgList(text='黑丝',iNumber=1):
         url1=f'https://bizhi.cheetahfun.com/search.html?search={text}&page={iNumber}'
         url2=f'https://bizhi.cheetahfun.com/sj/search.html?search={text}&page={iNumber}'
         imgjson=get(url1)+get(url2)
+        random.shuffle(imgjson)
     except:
         imgjson=[{
             'url':'err.png',

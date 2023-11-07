@@ -31,7 +31,7 @@
     left: 0;
 }
 #search .search-logo{
-    position: absolute;
+    position: fixed;
     bottom: 5%;
     right: 15px;
     width: 55px;
@@ -119,7 +119,7 @@
     box-shadow: #0000008c 2px 3px 7px 0px;
 }
 #search .search-box .search-main .search-pic{
-    height: calc(100% - 145px);
+    max-height: calc(100% - 145px);
     overflow-y: scroll;
     display: block;
 }

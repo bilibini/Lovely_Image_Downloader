@@ -5,7 +5,7 @@ import wsock.tcp.simpleHttpServer;
 import py3;
 //import py3.lib.bs4;
 /*DSG{{*/
-mainForm = win.form(text="图片下载器";right=959;bottom=591;border="dialog frame")
+mainForm = win.form(text="美图下载器";right=959;bottom=591;border="dialog frame")
 mainForm.add()
 /*}}*/
 
@@ -28,8 +28,10 @@ g_addDowntoWinForm=function(imgsrc){
 
 var pyMain=py3.import("pyMain");
 var theApp = web.view(mainForm);
+/*
 theApp.enableDefaultContextMenus(false);
 theApp.enableDevTools(false);
+*/
 theApp.external = {
 	look = function(imgsrc){
 		g_imgurl=imgsrc;
@@ -45,6 +47,11 @@ theApp.external = {
         import win.dlg.message;
         mainForm.msgInfo('正在加载图片……',150)
     	return  web.json.stringify(pyMain.getImgSrc(iNumber));
+    }
+    getSearchImg=function(text,iNumber){
+        import win.dlg.message;
+        mainForm.msgInfo('正在加载图片……',150)
+    	return  web.json.stringify(pyMain.getSearchImgSrc(text,iNumber));
     }
     exit = function() {
         theApp.close();

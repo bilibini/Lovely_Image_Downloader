@@ -1,7 +1,7 @@
 ﻿<html>
 <head>
     <meta charset="UTF-8">
-    <title>图片下载器</title>
+    <title>美图下载器</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -71,7 +71,7 @@
         }
         async function getImglist(iN){
             let imgsrclists=await aardio.getImg(iN)
-            let imgjson=JSON.parse(imgsrclists)
+            let imgjsonlist=JSON.parse(imgsrclists)
             let el="#main .row"
             for(let imgjson of imgjsonlist){
                 addImg(el,imgjson['url'],imgjson['smallurl'],imgjson['title']);
@@ -92,9 +92,10 @@
             }else{
                 pNumber=1;
                 searchtext=text;
+                document.querySelector(".search-pic .row").innerHTML='';
             }
             let imgsrclists=await aardio.getSearchImg(text,pNumber)
-            let imgjson=JSON.parse(imgsrclists)
+            let imgjsonlist=JSON.parse(imgsrclists)
             let el=".search-pic .row"
             for(let imgjson of imgjsonlist){
                 addImg(el,imgjson['url'],imgjson['smallurl'],imgjson['title']);
@@ -119,7 +120,7 @@
             let boxHeight = document.querySelector("#search .search-pic").clientHeight;
             let boxdocumentHeight = document.querySelector("#search .search-pic").scrollHeight;
             let boxscrollTop =  document.querySelector("#search .search-pic").scrollTop;
-            if ((boxHeight + boxscrollTop + 1) >= documentHeight) {
+            if ((boxHeight + boxscrollTop + 1) >= boxdocumentHeight) {
                 iNumber=iNumber+1;
                 getSearchImglist(iNumber);
             }
