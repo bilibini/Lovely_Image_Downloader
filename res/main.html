@@ -21,7 +21,42 @@
             </div> -->
         </div>
     </div>
+    <div id="search">
+        <div class="search-logo" onclick="openSearch()"><svg t="1699324893572" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2243" width="30" height="30"><path d="M959.936 1024c-12.48 0-25.152-3.648-36.16-11.264l-50.176-34.496c-117.696-80.896-168.192-229.952-122.816-362.432 19.072-55.424 22.336-116.16 9.472-175.616-25.344-117.568-121.088-214.016-238.272-240C415.808 176.768 309.952 204.352 231.744 276.096S116.8 450.048 130.944 556.352c18.176 136.448 125.248 247.872 260.352 270.784 75.072 12.608 148.8 0.32 213.44-36.032 30.784-17.28 69.888-6.336 87.168 24.448 17.344 30.784 6.4 69.824-24.448 87.168-90.496 50.944-193.472 68.16-297.6 50.688-189.824-32.256-340.224-188.544-365.824-380.096-19.456-146.176 33.344-292.48 141.12-391.424C254.656 81.344 401.984 42.368 549.76 75.264c165.12 36.608 300.032 172.416 335.616 337.984 17.728 82.176 13.056 166.656-13.504 244.032-26.88 78.4 3.648 166.912 74.176 215.424l50.176 34.496c29.12 20.032 36.48 59.904 16.512 89.024C1000.32 1014.336 980.288 1024 959.936 1024z" fill="#ffffff" p-id="2244"></path></svg></div>
+        <div class="search-box">
+            <div class="search-main">
+                <div class="search-bar">
+                    <input type="text" id="search-input"placeholder="请输入搜索内容哦|ू･ω･ )" autocomplete="off">
+                    <Button type="text" id="search-btn" onclick="getSearchImglist()"><svg t="1699324893572" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2243" width="12" height="12"><path d="M959.936 1024c-12.48 0-25.152-3.648-36.16-11.264l-50.176-34.496c-117.696-80.896-168.192-229.952-122.816-362.432 19.072-55.424 22.336-116.16 9.472-175.616-25.344-117.568-121.088-214.016-238.272-240C415.808 176.768 309.952 204.352 231.744 276.096S116.8 450.048 130.944 556.352c18.176 136.448 125.248 247.872 260.352 270.784 75.072 12.608 148.8 0.32 213.44-36.032 30.784-17.28 69.888-6.336 87.168 24.448 17.344 30.784 6.4 69.824-24.448 87.168-90.496 50.944-193.472 68.16-297.6 50.688-189.824-32.256-340.224-188.544-365.824-380.096-19.456-146.176 33.344-292.48 141.12-391.424C254.656 81.344 401.984 42.368 549.76 75.264c165.12 36.608 300.032 172.416 335.616 337.984 17.728 82.176 13.056 166.656-13.504 244.032-26.88 78.4 3.648 166.912 74.176 215.424l50.176 34.496c29.12 20.032 36.48 59.904 16.512 89.024C1000.32 1014.336 980.288 1024 959.936 1024z" fill="#ffffff" p-id="2244"></path></svg>搜索</Button>
+                </div>
+                <div class="search-tab">
+                    <span class="labe" onclick="getSearchImglist('唯美')">唯美</span>
+                    <span class="labe" onclick="getSearchImglist('美女')">美女</span>
+                    <span class="labe" onclick="getSearchImglist('动漫')">动漫</span>
+                    <span class="labe" onclick="getSearchImglist('性感')">性感</span>
+                    <span class="labe" onclick="getSearchImglist('可爱')">可爱</span>
+                </div>
+                <div class="search-pic">
+                    <div class="searchrow row">
+                        <!-- <div class="box" oncontextmenu="downImg('http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg')" onclick="lookImg('http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg')">
+                            <img src="http://img4.cache.netease.com/photo/0031/2017-01-17/CB0520AV6LRF0031.jpg" alt="">
+                        </div> -->
+                    </div>
+                </div>
+                <div class="close-btn" onclick="closeSearch()">✘</div>
+            </div>
+        </div>
+    </div>
+    
     <script type="text/javascript">
+        function openSearch(){
+            document.querySelector("#search .search-box").style.display="block";
+            document.querySelector("#search .search-logo").style.display="none";
+        }
+        function closeSearch(){
+            document.querySelector("#search .search-box").style.display="none";
+            document.querySelector("#search .search-logo").style.display="grid";
+        }
         function lookImg(imgsrc){
             aardio.look(imgsrc);
             aardio.lookEND();
@@ -29,32 +64,64 @@
         function downImg(imgsrc){
             aardio.down(imgsrc);
         }
-        function addImg(imgsrc,simgsrc,title){
-            var main=document.querySelector("#main .row");
+        function addImg(el,imgsrc,simgsrc,title){
+            var main=document.querySelector(el);
             var box=`<div class="box" oncontextmenu="downImg('${imgsrc}')" onclick="lookImg('${imgsrc}')"><img src="${simgsrc}" onerror="this.src='/bg.png'" loading="lazy" alt="${title}"></div>`;
             main.insertAdjacentHTML("beforeend",box);
         }
         async function getImglist(iN){
             let imgsrclists=await aardio.getImg(iN)
-            let imgjsonlist=JSON.parse(imgsrclists)
+            let imgjson=JSON.parse(imgsrclists)
+            let el="#main .row"
             for(let imgjson of imgjsonlist){
-                addImg(imgjson['url'],imgjson['smallurl'],imgjson['title']);
+                addImg(el,imgjson['url'],imgjson['smallurl'],imgjson['title']);
             }
         }
+        async function getSearchImglist(ttt){
+            if(!(ttt==undefined||ttt=="")){
+                document.querySelector("#search-input").value=ttt
+            }
+            let text=document.querySelector("#search-input").value
+            if(searchtext==text){
+                pNumber=pNumber+1;
+            }else if(text==""){
+                pNumber=1;
+                text="黑丝";
+                document.querySelector("#search-input").value=text;
+                searchtext=text;
+            }else{
+                pNumber=1;
+                searchtext=text;
+            }
+            let imgsrclists=await aardio.getSearchImg(text,pNumber)
+            let imgjson=JSON.parse(imgsrclists)
+            let el=".search-pic .row"
+            for(let imgjson of imgjsonlist){
+                addImg(el,imgjson['url'],imgjson['smallurl'],imgjson['title']);
+            }
+        }
+        
         var iNumber=1;
+        var pNumber=1;
+        var searchtext="黑丝";
 		getImglist(iNumber);
-        // 原生JS 判断整个文档滚动至底部
+        
         window.onscroll = ()=>{
-            // 窗口高度
-            var windowHeight = document.body.clientHeight;
-            // 页面高度
-            var documentHeight = document.body.scrollHeight;
-            // 滚动条位置
-            var scrollTop =  document.body.scrollTop;
+            let windowHeight = document.body.clientHeight;
+            let documentHeight = document.body.scrollHeight;
+            let scrollTop =  document.body.scrollTop;
             if ((windowHeight + scrollTop + 2) >= documentHeight) {
-                //页面滚动到达底部
                 iNumber=iNumber+1;
                 getImglist(iNumber);
+            }
+        }
+        document.querySelector("#search .search-pic").onscroll = ()=>{
+            let boxHeight = document.querySelector("#search .search-pic").clientHeight;
+            let boxdocumentHeight = document.querySelector("#search .search-pic").scrollHeight;
+            let boxscrollTop =  document.querySelector("#search .search-pic").scrollTop;
+            if ((boxHeight + boxscrollTop + 1) >= documentHeight) {
+                iNumber=iNumber+1;
+                getSearchImglist(iNumber);
             }
         }
 
