@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<project ver="10" name="美图下载器" libEmbed="true" icon="detailed diaram\20231103083829240.ico" ui="win" output="图片下载器.exe" CompanyName="单位名称" FileDescription="图片下载器" LegalCopyright="Copyright (C) bilibini 2023" ProductName="图片下载器" InternalName="图片下载器" FileVersion="0.0.0.08" ProductVersion="0.0.0.08" publishDir="/dist/" dstrip="false" local="false" ignored="false">
+<project ver="10" name="美图下载器" libEmbed="true" icon="detailed diaram\20231103083829240.ico" ui="win" output="图片下载器.exe" CompanyName="单位名称" FileDescription="图片下载器" LegalCopyright="Copyright (C) bilibini 2023" ProductName="图片下载器" InternalName="图片下载器" FileVersion="0.0.0.10" ProductVersion="0.0.0.10" publishDir="/dist/" dstrip="false" local="false" ignored="false">
 	<file name="main.aardio" path="main.aardio" comment="main.aardio"/>
 	<folder name="资源文件" path="res" embed="true" comment="嵌入资源目录" local="false" ignored="false">
 		<file name="main.html" path="res\main.html" comment="res\main.html"/>
